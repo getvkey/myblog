@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>360应用市场排行</title>
+    <link rel="icon" href="http://strive.pub/static/favicon.ico">
+</head>
+<style type="text/css">
+ul li{
+    list-style: none;
+    float: left;
+    padding-left: 10px;
+}
+
+</style>
+<body>
+<!-- 
+全部 系统安全 通讯社交 影音视听 新闻阅读 生活休闲 主题壁纸 办公商务 摄影摄像 购物优惠 地图旅游 教育学习 金融理财 健康医疗
+-->
+
+
+<form id="myForm" action="/zs/" method="get">
+<input type="hidden" name="key" runat="server" id="hidLI" />
+{% csrf_token %}
+<ul id="se">
+<h2>360应用市场Android App下载量排行</h2>
+<li value="1">全部</li>
+<li value="11">系统安全</li>
+<li value="12">通讯社交</li>
+<li value="14">影音视听</li>
+<li value="15">新闻阅读</li>
+<li value="16">生活休闲</li>
+<li value="18">主题壁纸</li>
+<li value="17">办公商务</li>
+<li value="102228">摄影摄像</li>
+<li value="102230">购物优惠</li>
+<li value="102231">地图旅游</li>
+<li value="102232">教育学习</li>
+<li value="102139">金融理财</li>
+<li value="102233">健康医疗</li>
+</ul>
+</form>
+<!-- <p><a href="{{ url }}" target="_blank">{{ url }}</a></p> -->
+<br>
+
+
+<ol>
+{% for item in danny %}
+<li><a href="{{ item.down_url }}">{{ item.name }}</a></li>
+{% endfor %}
+</ol>
+
+
+
+
+<script type="text/javascript">
+
+var ulItem = document.getElementById("se");
+ulItem.onclick = function(e){
+    e = e || window.event;//这一行及下一行是为兼容IE8及以下版本
+    var target = e.target || e.srcElement;
+    if(target.tagName.toLowerCase() === "li"){
+        target.style.color = "cyan"
+        document.getElementById("hidLI").value = target.value
+        document.getElementById("myForm").submit()
+    }
+}
+
+
+var url = location.search; //获取url中"?"符后的字串 
+
+if (url.indexOf("?") != -1) { 
+    var str = url.substr(5); 
+    var lli = document.getElementById("se").getElementsByTagName("li")
+
+    for(var j=0;j<=lli.length;j++){
+        if(str == lli[j].value){
+            lli[j].style.color = "red"
+        }
+        // console.log(lli[j].value)
+        // alert(str)
+    }
+
+} 
+
+
+
+</script>
+</body>
+</html>

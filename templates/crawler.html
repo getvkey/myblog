@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>抓取图片</title>
+    <link rel="icon" href="http://strive.pub/static/favicon.ico">
+<style type="text/css">
+body, div {padding: 0;margin: 0;}
+#container {width: 1070px;margin: 0 auto;}
+.wrap {width: 360px;height: 48px;margin: 0 auto;}
+.wrap form input {width: 240px;height: 24px;margin-top: 12px;}
+.showcase {width: 1070px;height: 100%;margin: 0 auto;}
+.showcase img {width: 450px;height: 350px;}
+</style>
+</head>
+<body>
+<div id="container">
+<div class="wrap">
+<form action="/mm/" class="crawl" method="get">
+<input type="text" id="q" name="q" value="http://www.wmpic.me/wallpaper"  autocomplete="off">
+<button type="submit">抓一抓</button>
+</form>
+</div>
+<div class="showcase">
+{% if results %}
+    <h3>从<a href="{{query}}" target="_blank">{{query}}</a>抓取到下面的图片</h3>
+    {% for item in results %}
+        <a href={{ item|escape }} target="_blank" title="新标签页打开图片"><img src={{ item|escape }}></a>
+        <!-- <p>{{ item|escape }}</p> -->
+    {% endfor %}
+{% endif %}
+</div>
+</div>
+
+<script type="text/javascript">
+// function checkNull(){
+    //  var txt = document.getElementByID('q').innerHTML
+    //  if(txt==""){
+        //      alert("no")
+        //  }
+        // }
+</script>
+</body>
+</html>

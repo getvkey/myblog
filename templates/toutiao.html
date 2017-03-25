@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>今日头条抓取测试</title>
+	<meta charset="utf-8">
+    <link rel="icon" href="http://strive.pub/static/favicon.ico">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+</head>
+<style type="text/css">
+*{text-decoration:none}
+.item{position:relative;width:700px;height:123px}
+.item .item-inner{position:relative;width:660px;height:115px;border-bottom:1px solid #F1F2F3;margin:auto;margin-top:7px}
+.left .img_wrap{display:block;width:156px;height:100px;border:1px solid #e8e8e8;background:#e8e8e8;overflow:hidden}
+.left .img_wrap img{width:100%;height:100%}
+.item .left{float:left;display:inline-block}
+.item .right{position:relative;float:right;height:102px;width:480px;display:inline-block}
+.item .right .right-inner{display:inline-block;width:100%;margin-top:30px}
+.item .right .right-inner .right-up{font-size:20px}
+.item .right .right-inner .right-up a{color:#000}
+.item .right .right-inner .right-dn{font-size:12px;margin-top:15px}
+.item .right .right-inner .right-dn a{color:#222;margin-right:7px}
+.item .right .right-inner .right-dn .author{float: left;margin-right: 7px;margin-top: -9px;}
+.item .right .right-inner .right-dn .author a{margin-right:2px;}
+.item .right .right-inner .right-dn .author a img{width:18px;height:18px;border-radius:50%;}
+.y-box .y-left{width:600px;height:40px;padding:0 16px;background-color:#fff;border:1px solid #ed4040;-moz-box-sizing:border-box;box-sizing:border-box;border-radius:4px 0 0 4px;display:inline-block}
+.y-box .y-left input{width:100%;border:0;outline:0;font-size:16px;height:16px;line-height:16px;background-color:#fff;padding:11px 0;color:#222}
+.y-box .y-right{display:inline-block}
+.y-box .y-right button{outline:0;border:0;width:100px;background:#ed4040;font-size:16px;line-height:40px;text-align:center;color:#fff;border-radius:0 4px 4px 0}
+</style>
+<body>
+
+<div>
+	<form style="display: block;" action="/toutiao/" method="get">
+		<div class="y-box"> 
+			<div class="y-left search-content"><input type="text" name="q" autocomplete="off" placeholder="搜你想搜的"> </div> 
+			<div class="y-right"> <button type="submit" class="search-btn">搜索</button> </div> 
+		</div>
+	</form>
+</div>
+
+{% for item in me %}
+<div class="item">
+	<div class="item-inner">
+		<div class="left">
+			<a class="img_wrap" href="{{ item.share_url }}" target="_blank"><img src="{{ item.image_url }}"></a>
+		</div>
+		<div class="right">
+			<div class="right-inner">
+				<div class="right-up"><a href="{{ item.share_url }}" target="_blank">{{ item.title }}</a></div>
+				<div class="right-dn">
+					<div class="author">
+						<a target="_blank" href="{{ item.media_url }}"><img src="{{ item.media_avatar_url }}"></a>
+						<span><a target="_blank" href="{{ item.media_url }}">{{ item.media_name }}</a></span>
+					</div>
+					<a target="_blank" href="http://www.toutiao.com{{ item.item_source_url }}#comment_area">{{ item.comments_count }}评论</a>
+					<span>{{ item.datetime }}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endfor %}
+
+
+</body>
+</html>
